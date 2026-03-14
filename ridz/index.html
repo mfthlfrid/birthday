@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================================================
+     🌹 WEBSITE ULANG TAHUN — PANDUAN EDIT
+     Cari komentar "✏️ EDIT DI SINI" untuk bagian yang perlu diubah
+     ============================================================ -->
+
+<!-- ✏️ EDIT DI SINI — Judul tab browser -->
+<title>Happy Birthday, Sayangku 💕</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #c9485b;
+    --blush: #f0a0b0;
+    --cream: #fff8f0;
+    --gold: #d4a843;
+    --deep: #1a0a0f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--deep); color: var(--cream); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; cursor: none; }
+
+  /* Cursor */
+  .cursor { position: fixed; width: 12px; height: 12px; background: var(--blush); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: screen; }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--blush); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.5; }
+
+  /* Stars */
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--dur) infinite ease-in-out; }
+  @keyframes twinkle { 0%,100%{opacity:0.1;transform:scale(1)} 50%{opacity:1;transform:scale(1.3)} }
+
+  /* Petals */
+  .petals-container { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+  .petal { position: absolute; top: -30px; font-size: 1.2rem; animation: fall linear infinite; opacity: 0.7; }
+  @keyframes fall {
+    0% { transform: translateY(-30px) rotate(0deg) translateX(0); opacity: 0.8; }
+    50% { transform: translateY(50vh) rotate(180deg) translateX(40px); }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+  }
+
+  section { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 2rem; }
+
+  /* ===== HERO ===== */
+  #hero { text-align: center; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at center, #3d0a1a 0%, #1a0a0f 70%); z-index: -1; }
+  .hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,72,91,0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); animation: pulse-glow 4s ease-in-out infinite; }
+  @keyframes pulse-glow { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.6} 50%{transform:translate(-50%,-50%) scale(1.2);opacity:1} }
+
+  .heart-icon { font-size: 4rem; animation: heartbeat 1.5s ease-in-out infinite; display: block; margin-bottom: 1.5rem; filter: drop-shadow(0 0 20px rgba(201,72,91,0.8)); }
+  @keyframes heartbeat { 0%,100%{transform:scale(1)} 14%{transform:scale(1.2)} 28%{transform:scale(1)} 42%{transform:scale(1.15)} 56%{transform:scale(1)} }
+
+  .subtitle-top { font-style: italic; font-size: 1.1rem; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1rem; opacity: 0; animation: fadeUp 1s ease forwards 0.3s; }
+
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem,10vw,7rem); font-weight: 700; line-height: 1.05; background: linear-gradient(135deg, var(--cream) 0%, var(--gold) 40%, var(--blush) 70%, var(--cream) 100%); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 4s linear infinite, fadeUp 1s ease forwards 0.6s; opacity: 0; }
+  @keyframes shimmer { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  .name-line { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(2rem,6vw,4.5rem); color: var(--blush); margin-top: 0.3rem; opacity: 0; animation: fadeUp 1s ease forwards 0.9s; }
+  .divider { width: 120px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 2rem auto; opacity: 0; animation: fadeUp 1s ease forwards 1.2s; }
+  .hero-date { font-style: italic; font-size: 1.1rem; color: rgba(255,248,240,0.6); letter-spacing: 3px; opacity: 0; animation: fadeUp 1s ease forwards 1.5s; }
+  .hero-badge { margin-top: 1.2rem; display: inline-block; padding: 0.4rem 1.4rem; border: 1px solid rgba(212,168,67,0.4); color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0; animation: fadeUp 1s ease forwards 1.8s; }
+
+  .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeUp 1s ease forwards 2.5s; color: rgba(255,248,240,0.4); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+  .scroll-arrow { width: 1px; height: 50px; background: linear-gradient(to bottom, transparent, var(--gold)); animation: scroll-pulse 2s ease-in-out infinite; }
+  @keyframes scroll-pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* ===== MESSAGE ===== */
+  #message { background: linear-gradient(180deg, var(--deep) 0%, #2a0d18 50%, var(--deep) 100%); }
+  .message-card { max-width: 700px; text-align: center; position: relative; }
+  .message-card::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 12rem; color: var(--rose); opacity: 0.08; position: absolute; top: -4rem; left: -2rem; line-height: 1; pointer-events: none; }
+  .section-label { font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; font-style: italic; }
+  .message-text { font-size: clamp(1.2rem,2.5vw,1.6rem); line-height: 1.9; color: rgba(255,248,240,0.85); font-style: italic; font-weight: 300; }
+  .message-text strong { color: var(--blush); font-style: normal; font-weight: 400; }
+  .signature { margin-top: 3rem; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--gold); }
+
+  /* ===== POLAROID GALLERY ===== */
+  #gallery { background: radial-gradient(ellipse at top, #2d0f1c 0%, var(--deep) 60%); min-height: auto; padding: 5rem 2rem 7rem; }
+  .gallery-title-wrap { text-align: center; margin-bottom: 3.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem,5vw,3.5rem); color: var(--cream); }
+  .section-title em { color: var(--blush); }
+
+  .polaroid-scene { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 0; max-width: 1000px; width: 100%; margin: 0 auto; padding-top: 2rem; }
+
+  .polaroid {
+    position: relative;
+    background: #fdf6ee;
+    padding: 14px 14px 52px 14px;
+    box-shadow: 4px 6px 30px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.08);
+    width: 190px;
+    margin: 20px 10px;
+    transition: transform 0.4s cubic-bezier(.23,1,.32,1), box-shadow 0.4s ease;
+    cursor: none;
+    z-index: 1;
+  }
+  .polaroid:hover { transform: rotate(0deg) scale(1.13) translateY(-24px) !important; box-shadow: 8px 24px 60px rgba(0,0,0,0.7); z-index: 10; }
+
+  /* Scattered rotations */
+  .polaroid:nth-child(1) { transform: rotate(-7deg) translateY(14px); }
+  .polaroid:nth-child(2) { transform: rotate(5deg) translateY(-16px); }
+  .polaroid:nth-child(3) { transform: rotate(-3deg) translateY(8px); }
+  .polaroid:nth-child(4) { transform: rotate(8deg) translateY(-10px); }
+  .polaroid:nth-child(5) { transform: rotate(-5deg) translateY(18px); }
+
+  /* Tape */
+  .polaroid::before { content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(var(--tr, -2deg)); width: 52px; height: 22px; background: rgba(212,168,67,0.3); border-radius: 2px; z-index: 2; }
+  .polaroid:nth-child(odd)::before { --tr: 2deg; }
+  .polaroid:nth-child(even)::before { --tr: -3deg; }
+
+  .polaroid-img-wrap { width: 100%; aspect-ratio: 1/1; overflow: hidden; background: #1a0a0f; }
+  .polaroid-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(0.1) contrast(1.05); transition: filter 0.4s ease; }
+  .polaroid:hover .polaroid-img-wrap img { filter: sepia(0) contrast(1.1) brightness(1.05); }
+
+  /* Placeholder saat belum ada foto */
+  .photo-placeholder { width: 100%; height: 100%; min-height: 162px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #2a0d18, #3d1020); gap: 0.5rem; }
+  .photo-placeholder .ph-icon { font-size: 2.2rem; }
+  .photo-placeholder .ph-text { font-size: 0.62rem; color: rgba(255,200,200,0.45); letter-spacing: 1px; text-align: center; padding: 0 8px; line-height: 1.5; font-family: 'Cormorant Garamond', serif; }
+
+  .polaroid-caption { font-family: 'Caveat', cursive; font-size: 0.95rem; color: #5a2030; text-align: center; padding-top: 10px; line-height: 1.3; }
+
+  /* ===== REASONS ===== */
+  #reasons { background: radial-gradient(ellipse at bottom, #2d0f1c 0%, var(--deep) 60%); }
+  .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; max-width: 900px; width: 100%; margin-top: 3rem; }
+  .reason-card { background: linear-gradient(135deg, rgba(201,72,91,0.08) 0%, rgba(26,10,15,0.6) 100%); border: 1px solid rgba(201,72,91,0.2); border-radius: 4px; padding: 2rem; text-align: center; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; backdrop-filter: blur(10px); }
+  .reason-card:hover { transform: translateY(-8px); border-color: rgba(201,72,91,0.6); box-shadow: 0 20px 40px rgba(201,72,91,0.15); }
+  .reason-emoji { font-size: 2.5rem; display: block; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .reason-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--blush); margin-bottom: 0.7rem; }
+  .reason-card p { font-size: 0.95rem; color: rgba(255,248,240,0.65); line-height: 1.7; }
+
+  /* ===== WISH ===== */
+  #wish { text-align: center; background: linear-gradient(180deg, var(--deep) 0%, #3d0a1a 50%, var(--deep) 100%); }
+  .wish-container { max-width: 650px; }
+  .big-wish { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,4vw,3rem); line-height: 1.4; margin: 2rem 0; color: var(--cream); }
+  .big-wish em { color: var(--gold); font-style: italic; }
+  .candles { font-size: 3rem; letter-spacing: 0.5rem; animation: flicker 2s ease-in-out infinite alternate; display: block; margin: 2rem 0; }
+  @keyframes flicker { 0%{filter:drop-shadow(0 0 8px #ffcc44) brightness(0.9)} 100%{filter:drop-shadow(0 0 20px #ffaa00) brightness(1.1)} }
+  .love-button { display: inline-block; margin-top: 2.5rem; padding: 1rem 3rem; background: transparent; border: 1px solid var(--rose); color: var(--cream); font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; cursor: none; text-decoration: none; transition: all 0.4s ease; position: relative; overflow: hidden; }
+  .love-button::before { content: ''; position: absolute; inset: 0; background: var(--rose); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; z-index: -1; }
+  .love-button:hover::before { transform: scaleX(1); }
+
+  footer { position: relative; z-index: 2; text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(201,72,91,0.15); color: rgba(255,248,240,0.3); font-size: 0.85rem; font-style: italic; letter-spacing: 2px; }
+  #fireworks { position: fixed; inset: 0; pointer-events: none; z-index: 100; }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Lightbox */
+  .lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(10,3,8,0.96); align-items: center; justify-content: center; cursor: none; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 88vw; max-height: 82vh; object-fit: contain; border: 2px solid rgba(240,160,176,0.25); box-shadow: 0 0 80px rgba(201,72,91,0.25); border-radius: 2px; }
+  .lb-close { position: absolute; top: 1.5rem; right: 2rem; font-size: 2.5rem; color: var(--blush); cursor: none; transition: color 0.3s; line-height: 1; }
+  .lb-close:hover { color: white; }
+  .lb-caption { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--blush); letter-spacing: 2px; white-space: nowrap; }
+
+  @media(max-width:600px) {
+    .polaroid { width: 155px; padding: 10px 10px 44px 10px; }
+    .polaroid-caption { font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="stars" id="stars"></div>
+<div class="petals-container" id="petals"></div>
+<canvas id="fireworks"></canvas>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lb-close" id="lbClose">✕</span>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
+
+<!-- ============================================================
+  HERO
+  ✏️ EDIT bagian ini untuk nama, tanggal, dan usia
+============================================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <span class="heart-icon">💕</span>
+  <p class="subtitle-top">Sebuah pesan cinta untukmu</p>
+  <h1>Happy Birthday</h1>
+
+  <!-- ✏️ EDIT DI SINI — Ganti "Nama Pasanganmu" dengan nama dia -->
+  <div class="name-line">Ayangkuu 🌹</div>
+
+  <div class="divider"></div>
+
+  <!-- ✏️ EDIT DI SINI — Ganti dengan tanggal ulang tahunnya -->
+  <p class="hero-date">17 Maret · Hari paling spesial untukku</p>
+
+  <!-- ✏️ EDIT DI SINI — Ganti __ dengan usianya (boleh dihapus kalau tidak mau) -->
+  <div class="hero-badge">✨ Ervina Fitri Dewi ✨</div>
+
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+  PESAN CINTA
+  ✏️ EDIT teks pesan di bawah ini
+============================================================ -->
+<section id="message">
+  <div class="message-card reveal">
+    <p class="section-label">Dari hatiku yang terdalam</p>
+    <p class="message-text">
+      Di hari yang sangat istimewa ini, aku ingin kamu tahu betapa <strong>berartinya kehadiranmu</strong> dalam setiap langkah hidupku.<br><br>
+      Kamu bukan hanya seseorang yang aku cintai — kamu adalah <strong>rumah</strong> yang selalu ingin aku pulang kepadanya. Tempat di mana aku merasa paling aman, paling bahagia, dan paling menjadi diriku sendiri.<br><br>
+      Selamat ulang tahun, cintaku. Semoga setiap hari yang kamu jalani selalu dipenuhi dengan <strong>kebahagiaan, tawa, dan cinta</strong> — sama seperti yang selalu kamu berikan kepadaku.
+    </p>
+    <div class="divider" style="animation:none;opacity:1;"></div>
+    <!-- ✏️ EDIT DI SINI — Tanda tangan / namamu -->
+    <div class="signature">— Dengan seluruh cintaku 💌</div>
+  </div>
+</section>
+
+<!-- ============================================================
+  GALERI FOTO POLAROID (5 foto)
+
+  ✏️ CARA MENAMBAH FOTO — ada 2 cara:
+
+  CARA 1 — Foto dari internet (Imgur, Google Drive, dll):
+    Ganti: <div class="photo-placeholder">...</div>
+    Dengan: <img src="https://link-foto-kamu.jpg" alt="Foto 1">
+
+  CARA 2 — Foto dari komputermu:
+    1. Taruh file foto di FOLDER YANG SAMA dengan birthday.html
+    2. Ganti: <div class="photo-placeholder">...</div>
+       Dengan: <img src="foto1.jpg" alt="Foto 1">
+
+  ✏️ Ganti juga caption di .polaroid-caption dan data-caption
+============================================================ -->
+<section id="gallery">
+  <div class="gallery-title-wrap reveal">
+    <p class="section-label">kenangan terindah Buatku</p>
+    <h2 class="section-title">Sicantik <em>Siimut</em> 📸</h2>
+  </div>
+
+  <div class="polaroid-scene reveal">
+
+    <!-- FOTO 1 ✏️ -->
+    <div class="polaroid" data-caption="Momen pertama kita 💕">
+      <div class="polaroid-img-wrap">
+        <!-- ✏️ Hapus div placeholder di bawah, ganti dengan: <img src="foto1.jpg" alt="Foto 1"> -->
+<img src="foto1.jpeg" alt="Foto 1">
+      </div>
+      <!-- ✏️ Ganti caption -->
+      <div class="polaroid-caption">Kenangan terindah 💕</div>
+    </div>
+
+    <!-- FOTO 2 ✏️ -->
+    <div class="polaroid" data-caption="Senyummu yang kutunggu 🌸">
+      <div class="polaroid-img-wrap">
+        <!-- ✏️ Hapus div placeholder di bawah, ganti dengan: <img src="foto2.jpg" alt="Foto 2"> -->
+<img src="foto2.jpeg" alt="Foto 1">
+      </div>
+      <!-- ✏️ Ganti caption -->
+      <div class="polaroid-caption">Senyummu yang kutunggu 🌸</div>
+    </div>
+
+    <!-- FOTO 3 ✏️ -->
+    <div class="polaroid" data-caption="Bersamamu, bahagia itu nyata ✨">
+      <div class="polaroid-img-wrap">
+        <!-- ✏️ Hapus div placeholder di bawah, ganti dengan: <img src="foto3.jpg" alt="Foto 3"> -->
+<img src="foto3.jpeg" alt="Foto 1">
+      </div>
+      <!-- ✏️ Ganti caption -->
+      <div class="polaroid-caption">Bersamamu, bahagia itu nyata ✨</div>
+    </div>
+
+    <!-- FOTO 4 ✏️ -->
+    <div class="polaroid" data-caption="Kenangan yang tak terlupakan 🌹">
+      <div class="polaroid-img-wrap">
+        <!-- ✏️ Hapus div placeholder di bawah, ganti dengan: <img src="foto4.jpg" alt="Foto 4"> -->
+<img src="foto4.jpeg" alt="Foto 1">
+      </div>
+      <!-- ✏️ Ganti caption -->
+      <div class="polaroid-caption">Kenangan yang tak terlupakan 🌹</div>
+    </div>
+
+    <!-- FOTO 5 ✏️ -->
+    <div class="polaroid" data-caption="Kamu, favoritku selamanya 💖">
+      <div class="polaroid-img-wrap">
+        <!-- ✏️ Hapus div placeholder di bawah, ganti dengan: <img src="foto5.jpg" alt="Foto 5"> -->
+<img src="foto5.jpeg" alt="Foto 1">
+      </div>
+      <!-- ✏️ Ganti caption -->
+      <div class="polaroid-caption">Kamu, favoritku selamanya 💖</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ALASAN MENCINTAI -->
+<section id="reasons">
+  <div class="section-label reveal">mengapa kamu begitu istimewa</div>
+  <h2 class="section-title reveal">Alasan Aku <em>Mencintaimu</em></h2>
+  <div class="reasons-grid">
+    <div class="reason-card reveal"><span class="reason-emoji">✨</span><h3>Senyummu</h3><p>Senyummu adalah hal pertama yang membuatku jatuh cinta dan terus membuatku jatuh cinta setiap harinya.</p></div>
+    <div class="reason-card reveal"><span class="reason-emoji">💪</span><h3>Kekuatanmu</h3><p>Kamu begitu kuat dalam menghadapi segala hal — itu menginspirasi dan membuatku kagum setiap saat.</p></div>
+    <div class="reason-card reveal"><span class="reason-emoji">🌙</span><h3>Ketulusanmu</h3><p>Hatimu yang tulus dan penuh kasih adalah hadiah terindah yang pernah aku terima dari kehidupan.</p></div>
+    <div class="reason-card reveal"><span class="reason-emoji">🌺</span><h3>Caramu</h3><p>Cara kamu memperhatikan hal-hal kecil dan membuat segalanya terasa ajaib — hanya kamu yang bisa melakukan itu.</p></div>
+    <div class="reason-card reveal"><span class="reason-emoji">🎵</span><h3>Tawamu</h3><p>Tawa kamu adalah musik favoritku. Aku bisa mendengarnya selamanya dan tidak akan pernah bosan.</p></div>
+    <div class="reason-card reveal"><span class="reason-emoji">💫</span><h3>Semangat Hidupmu</h3><p>Semangatmu dalam menjalani hidup mengingatkanku bahwa dunia ini masih sangat indah dan penuh keajaiban.</p></div>
+  </div>
+</section>
+
+<!-- WISH -->
+<section id="wish">
+  <div class="wish-container reveal">
+    <p class="section-label">di hari istimewamu</p>
+    <h2 class="section-title">Harapan & <em>Doa Untukmu</em></h2>
+    <span class="candles">🕯️🎂🕯️</span>
+    <p class="big-wish">
+      Semoga di ulang tahunmu ini, semua impian dan harapanmu perlahan menjadi nyata.<br>
+      Semoga kamu selalu <em>sehat, bahagia, dan dicintai</em> — terutama olehku.<br><br>
+      Aku berjanji akan selalu ada untukmu, di setiap suka maupun duka.
+    </p>
+    <div class="divider" style="animation:none;opacity:1;"></div>
+    <p style="font-style:italic;color:rgba(255,248,240,0.5);font-size:1rem;margin-top:1.5rem;">Klik untuk merayakan bersamaku 🎉</p>
+    <a href="#" class="love-button" id="celebrateBtn">Rayakan Bersamaku ✨</a>
+  </div>
+</section>
+
+<!-- ✏️ EDIT DI SINI — Ganti "Nama Pasanganmu" di footer -->
+<footer>
+  dibuat dengan 💕 khusus untuk <em>VinaDewi</em> &nbsp;·&nbsp; selamat ulang tahun, sayangku
+</footer>
+
+<script>
+// === Cursor ===
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+(function animRing(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+
+// === Stars ===
+const starsEl = document.getElementById('stars');
+for(let i=0;i<180;i++){
+  const s=document.createElement('div'); s.className='star';
+  const sz=Math.random()*2.5+0.5;
+  s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s`;
+  starsEl.appendChild(s);
+}
+
+// === Petals ===
+const petalsEl = document.getElementById('petals');
+const symbols = ['🌸','🌹','💮','🌺','✿','❀'];
+for(let i=0;i<18;i++){
+  const p=document.createElement('div'); p.className='petal';
+  p.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  const dur=8+Math.random()*12;
+  p.style.cssText=`left:${Math.random()*100}%;font-size:${0.8+Math.random()*0.8}rem;animation-duration:${dur}s;animation-delay:${Math.random()*dur}s`;
+  petalsEl.appendChild(p);
+}
+
+// === Scroll Reveal ===
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// === Lightbox (hanya aktif jika foto sudah dimasukkan) ===
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCaption = document.getElementById('lbCaption');
+document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
+lightbox.addEventListener('click', e => { if(e.target===lightbox) lightbox.classList.remove('open'); });
+document.querySelectorAll('.polaroid').forEach(card => {
+  card.addEventListener('click', () => {
+    const img = card.querySelector('img');
+    if(!img) return;
+    lbImg.src = img.src;
+    lbCaption.textContent = card.dataset.caption || '';
+    lightbox.classList.add('open');
+  });
+});
+
+// === Fireworks ===
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+window.addEventListener('resize', ()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+let particles=[], fwActive=false;
+class Particle {
+  constructor(x,y,color){ this.x=x;this.y=y;this.vx=(Math.random()-.5)*8;this.vy=(Math.random()-.5)*8-3;this.alpha=1;this.color=color;this.size=Math.random()*3+1;this.gravity=0.15; }
+  update(){ this.x+=this.vx;this.y+=this.vy;this.vy+=this.gravity;this.vx*=0.99;this.alpha-=0.018; }
+  draw(){ ctx.save();ctx.globalAlpha=Math.max(0,this.alpha);ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();ctx.restore(); }
+}
+function launchFirework(x,y){
+  const colors=['#c9485b','#f0a0b0','#d4a843','#fff8f0','#ff6b8a','#ffcc44'];
+  for(let i=0;i<80;i++) particles.push(new Particle(x,y,colors[Math.floor(Math.random()*colors.length)]));
+}
+function animFW(){ if(!fwActive){requestAnimationFrame(animFW);return;} ctx.clearRect(0,0,canvas.width,canvas.height); particles=particles.filter(p=>p.alpha>0); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(animFW); }
+animFW();
+let fwInt;
+document.getElementById('celebrateBtn').addEventListener('click', e=>{
+  e.preventDefault(); fwActive=true; clearInterval(fwInt); let count=0;
+  fwInt=setInterval(()=>{ launchFirework(Math.random()*canvas.width,Math.random()*canvas.height*.6+50); launchFirework(canvas.width/2,canvas.height/2); if(++count>=12){ clearInterval(fwInt); setTimeout(()=>{fwActive=false;ctx.clearRect(0,0,canvas.width,canvas.height);},4000); } },300);
+});
+setTimeout(()=>{
+  fwActive=true;
+  for(let i=0;i<4;i++) setTimeout(()=>launchFirework(canvas.width*(.2+Math.random()*.6),canvas.height*(.2+Math.random()*.4)),i*400);
+  setTimeout(()=>{fwActive=false;ctx.clearRect(0,0,canvas.width,canvas.height);},3000);
+},2000);
+</script>
+</body>
+</html>
